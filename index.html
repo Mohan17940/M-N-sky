@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- =========================================
+         BASIC SETTINGS
+    ========================================== -->
+
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Makes website responsive on mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser tab title -->
+     <title>M&N Sky ☁️</title>
+
+
+    <!-- =========================================
+         GOOGLE FONT
+    ========================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================================
+         CONNECT CSS FILE
+    ========================================== -->
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         DECORATIVE BACKGROUND
+    ========================================== -->
+
+    <div class="background">
+
+        <div class="blur-circle circle-one"></div>
+
+        <div class="blur-circle circle-two"></div>
+
+        <div class="blur-circle circle-three"></div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         MAIN APPLICATION
+    ========================================== -->
+
+    <main class="app">
+
+
+        <!-- =========================================
+             HEADER
+        ========================================== -->
+
+        <header class="header">
+
+            <!-- Logo -->
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🌤️
+                </div>
+
+                <div>
+                    <h1>M&N Sky ☁️</h1>
+                    <p>Your little weather space</p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Dark mode button -->
+            <button
+                id="themeButton"
+                class="theme-button"
+                title="Toggle dark mode"
+            >
+                🌙
+            </button>
+
+        </header>
+
+
+
+        <!-- =========================================
+             SEARCH SECTION
+        ========================================== -->
+
+        <section class="search-section">
+
+
+            <!-- Search box -->
+            <div class="search-box">
+
+                <!-- Search icon -->
+                <span class="search-icon">
+                    🔍
+                </span>
+
+
+                <!-- City input -->
+                <input
+                    type="text"
+                    id="city"
+                    placeholder="Search for a city..."
+                    autocomplete="off"
+                >
+
+
+                <!-- Search button -->
+                <button
+                    id="searchButton"
+                    class="search-button"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+            <!-- Current location button -->
+            <button
+                id="locationButton"
+                class="location-button"
+            >
+                📍 My Location
+            </button>
+
+        </section>
+
+
+
+        <!-- =========================================
+             LOADING MESSAGE
+        ========================================== -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+
+            <div class="loader"></div>
+
+            <p>
+                Getting weather data...
+            </p>
+
+        </div>
+
+
+
+        <!-- =========================================
+             ERROR MESSAGE
+        ========================================== -->
+
+        <div
+            id="error"
+            class="error hidden"
+        >
+
+            <div class="error-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <strong>
+                    Weather unavailable
+                </strong>
+
+                <p id="errorText">
+                    Something went wrong.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =========================================
+             EMPTY STATE
+             
+             This appears before searching
+        ========================================== -->
+
+        <section
+            id="emptyState"
+            class="empty-state"
+        >
+
+            <div class="empty-icon">
+                🌦️
+            </div>
+
+            <h2>
+                Check the weather anywhere
+            </h2>
+
+            <p>
+                Search for a city to see current
+                weather and a 5-day forecast.
+            </p>
+
+        </section>
+
+
+
+        <!-- =========================================
+             WEATHER DASHBOARD
+             
+             Hidden initially.
+             JavaScript will show it after search.
+        ========================================== -->
+
+        <section
+            id="weatherDashboard"
+            class="weather-dashboard hidden"
+        >
+
+
+            <!-- =====================================
+                 CURRENT WEATHER
+            ====================================== -->
+
+            <div class="card current-weather">
+
+
+                <!-- City + icon -->
+                <div class="current-top">
+
+                    <div>
+
+                        <span class="weather-label">
+                            CURRENT WEATHER
+                        </span>
+
+                        <h2 id="location">
+                            --
+                        </h2>
+
+                        <p id="date">
+                            --
+                        </p>
+
+                    </div>
+
+
+                    <!-- Weather icon -->
+                    <div
+                        id="weatherIcon"
+                        class="weather-icon"
+                    >
+                        🌤️
+                    </div>
+
+                </div>
+
+
+                <!-- Main temperature -->
+                <div class="temperature">
+
+                    <span id="temperature">
+                        --
+                    </span>
+
+                    <sup>
+                        °C
+                    </sup>
+
+                </div>
+
+
+                <!-- Weather condition -->
+                <h3 id="condition">
+                    --
+                </h3>
+
+
+                <!-- Feels like -->
+                <p class="feels-like">
+
+                    Feels like
+
+                    <strong id="feelsLike">
+                        --
+                    </strong>
+
+                    °C
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 WEATHER DETAILS
+            ====================================== -->
+
+            <div class="details-grid">
+
+
+                <!-- Humidity -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        💧
+                    </div>
+
+                    <span>
+                        Humidity
+                    </span>
+
+                    <strong id="humidity">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Wind -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        💨
+                    </div>
+
+                    <span>
+                        Wind Speed
+                    </span>
+
+                    <strong id="wind">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Pressure -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        🎚️
+                    </div>
+
+                    <span>
+                        Pressure
+                    </span>
+
+                    <strong id="pressure">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Visibility -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        👁️
+                    </div>
+
+                    <span>
+                        Visibility
+                    </span>
+
+                    <strong id="visibility">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 SUNRISE / SUNSET
+            ====================================== -->
+
+            <div class="card sun-card">
+
+                <div class="section-heading">
+
+                    <h2>
+                        ☀️ Sun & Daylight
+                    </h2>
+
+                    <span>
+                        Today
+                    </span>
+
+                </div>
+
+
+                <div class="sun-content">
+
+
+                    <!-- Sunrise -->
+                    <div class="sun-item">
+
+                        <div class="sun-icon">
+                            🌅
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Sunrise
+                            </span>
+
+                            <strong id="sunrise">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Sun line -->
+                    <div class="sun-line"></div>
+
+
+                    <!-- Sunset -->
+                    <div class="sun-item">
+
+                        <div class="sun-icon">
+                            🌇
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Sunset
+                            </span>
+
+                            <strong id="sunset">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 5 DAY FORECAST
+            ====================================== -->
+
+            <div class="card forecast-card">
+
+                <div class="section-heading">
+
+                    <h2>
+                        📅 5-Day Forecast
+                    </h2>
+
+                    <span>
+                        Daily
+                    </span>
+
+                </div>
+
+
+                <!-- JavaScript will create cards here -->
+                <div
+                    id="forecast"
+                    class="forecast-grid"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================
+                 EXTRA DETAILS
+            ====================================== -->
+
+            <div class="details-grid">
+
+
+                <!-- Wind direction -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        🧭
+                    </div>
+
+                    <span>
+                        Wind Direction
+                    </span>
+
+                    <strong id="windDirection">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Rain chance -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        🌧️
+                    </div>
+
+                    <span>
+                        Rain Chance
+                    </span>
+
+                    <strong id="rainChance">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Minimum -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        ❄️
+                    </div>
+
+                    <span>
+                        Minimum
+                    </span>
+
+                    <strong id="minTemp">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <!-- Maximum -->
+                <div class="detail-card">
+
+                    <div class="detail-icon">
+                        🔥
+                    </div>
+
+                    <span>
+                        Maximum
+                    </span>
+
+                    <strong id="maxTemp">
+                        --
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             FOOTER
+        ========================================== -->
+<!-- =========================================
+     CREATOR FOOTER
+     Small personal credit
+========================================== -->
+
+<footer>
+
+   <p> M&N Sky ☁️ • Made with ❤️ by Mohan & Nijitha </p>
+    <p class="creator-credit">
+        Designed & Developed by
+        <strong>Mohan S</strong>
+        • CSE Student
+         <a
+        href="mailto:mohanwebdeveloper2614@gmail.com?subject=Weatherly%20Feedback"
+        class="feedback-button"
+    >
+         Send Feedback
+    </a>
+       
+    </p>
+     <!-- Feedback button -->
+   
+
+</footer>
+
+    </main>
+
+
+
+    <!-- =========================================
+         CONNECT JAVASCRIPT
+    ========================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
